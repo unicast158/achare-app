@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Nav} from "react-bootstrap";
+import {Nav, NavDropdown} from "react-bootstrap";
 import axios from "axios";
 import OverlayLoading from "../../loading/OverlayLoading";
+import './Nav.scss'
+import {Link} from "react-router-dom";
 
-const Nav_Menu = () => {
+const Nav_Menu = (props) => {
 
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState()
@@ -24,16 +26,28 @@ const Nav_Menu = () => {
 
 
     return (
-        <Nav activeKey="/home" className={'bg-light py-3'} onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-        >
-            <Nav.Item>
-                {
-                    menuItems.map((item, index) => {
-                            return (<Nav.Link key={index} href="/home" className={'link-dark'}>{item.title}</Nav.Link>)
-                        }
-                    )
-                }
-            </Nav.Item>
+        <Nav activeKey="/home" className={'justify-content-evenly bg-light py-3'}>
+            {
+                menuItems.map((item, index) => {
+                        return (
+                            <Nav.Item>
+                                <NavDropdown title={item.title} id={"basic-nav-" + index}>
+                                    {
+                                        item.services.map(item => {
+                                            return (
+                                                <Link to={'Details/' + item['slug']}><a className={'dropdown-item'}
+                                                > {item.title}
+                                                </a>
+                                                </Link>
+                                            )
+                                        })
+                                    }
+                                </NavDropdown>
+                            </Nav.Item>
+                        )
+                    }
+                )
+            }
             <OverlayLoading show={loading}/>
         </Nav>
     );

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Col, Container, Form, Image, Nav, Navbar, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
+import {Link} from "react-router-dom";
 
 const Navbar_react = () => {
 
@@ -17,7 +18,7 @@ const Navbar_react = () => {
                 <Col lg={11}>
                     <Navbar collapseOnSelect expand="lg" className={'pt-0'}>
                         <Navbar.Brand className={"d-flex"}>
-                            <Image src="https://achareh.ir/images/achareh-type-logo-new.png" fluid width={68}/>
+                            <Link to={'/'}><Image src="https://achareh.ir/images/achareh-type-logo-new.png" fluid width={130}/></Link>
                             <Form.Select onChange={SelectCityChange} value={CitySelect}
                                          aria-label="Default select example" className={'me-3'}>
                                 <option defaultValue value="tehran">تهران</option>

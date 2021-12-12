@@ -1,0 +1,15 @@
+.nav-item {
+  a {
+    color: #212529;
+
+    &:after {
+      content: none !important;
+    }
+  }
+}
+
+.dropdown-menu {
+  a {
+    text-align: right!important;
+  }
+}
