@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import LandingLayout from "../../Components/Layout/LandingLayout";
+import {useParams} from "react-router-dom";
 
 const Details = (props) => {
-    console.log(props.match.params.id)
-    return (
-        <LandingLayout>
-            <p>details</p>
-        </LandingLayout>
-    );
+    const {id: pageId} = useParams()
+
+    useEffect(() => {
+
+    }, [pageId]);
+
+    const generateContent = () => {
+        if (pageId === 'cooking') {
+            console.log(pageId);
+            return (<p>
+                salam
+            </p>)
+        } else return <></>
+    }
+
+    return generateContent()
 };
 
 export default Details;

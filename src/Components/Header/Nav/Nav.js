@@ -13,6 +13,7 @@ const Nav_Menu = (props) => {
     useEffect(() => {
         // Simple GET request using axios
         setLoading(true)
+        console.log(loading)
         axios.get('https://api.achareh.ir/v2/listings/categories/limited-services/?limit=9&city=333')
             .then(response => {
                 // let {data} = response;
@@ -35,7 +36,7 @@ const Nav_Menu = (props) => {
                                     {
                                         item.services.map(item => {
                                             return (
-                                                <Link to={'Details/' + item['slug']}><a className={'dropdown-item'}
+                                                <Link to={'/Details/' + item['slug']}><a className={'dropdown-item'}
                                                 > {item.title}
                                                 </a>
                                                 </Link>
