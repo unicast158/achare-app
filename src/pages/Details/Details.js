@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import LandingLayout from "../../Components/Layout/LandingLayout";
 import {useParams} from "react-router-dom";
 
 const Details = (props) => {

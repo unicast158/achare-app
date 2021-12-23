@@ -40,7 +40,7 @@ const Navbar_react = () => {
                                 </Button>{' '}
                                 </Nav.Link>
                                 <Nav.Link eventKey={2} href="#memes">
-                                    <Button variant="outline-success">ثبت نام | ورود</Button>{' '}
+                                    <Button href={'/Register'} variant="outline-success">ثبت نام | ورود</Button>{' '}
                                 </Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
