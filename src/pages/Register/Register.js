@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ServiceAuthentication from "../../serivce/service.authentication";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import axios from "axios";
+import AuthService from "../../serivce/Auth";
 
 const Register = () => {
 
@@ -13,20 +14,11 @@ const Register = () => {
 
     const HandleSubmit = (e) => {
         e.preventDefault();
-        axios.post("/api/v1/register", {
-            name: formData.name,
-            password: formData.password,
-            email: formData.email
-        }).then(
+        AuthService.Register(formData.email, formData.name, formData.password).then(
             (res) => {
-                console.log('res');
+                alert("با موفقیت ثبت نام شدید")
             }
-        )
-        /*ServiceAuthentication.postData(formData.email, formData.password, formData.name).then(
-            (res) => {
-                console.log('res');
-            }
-        )*/
+        ).catch(err=>alert(err.message))
     }
 
     const OnChange = (e) => {

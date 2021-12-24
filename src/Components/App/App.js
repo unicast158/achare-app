@@ -1,7 +1,7 @@
 import React from "react";
 import '../../../src/Styles/Style.css'
 import "../../../node_modules/normalize.css/normalize.css";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {ThemeProvider} from "react-bootstrap";
@@ -21,14 +21,33 @@ function App() {
                         <Route exact component={Home} path={"/"}/>
                         <Route exact component={Details} path={"/Details/:id"}/>
                         <Route exact component={SearchOutput} path={"/SearchOutput/:city/:q"}/>
-                        <Route exact component={Register} path={"/Register"}/>
-                        <Route exact component={Login} path={"/Login"}/>
-                        <Route exact component={Profile} path={"/profile"}/>
+                        <AuthRoute exact component={Register} path={"/Register"}/>
+                        <AuthRoute exact component={Login} path={"/Login"}/>
+                        <PrivateRoute exact component={Profile} path={"/profile"}/>
                     </Switch>
                 </Layout>
             </BrowserRouter>
         </ThemeProvider>
     );
+}
+
+const PrivateRoute = ({path, component}) => {
+    return <Route path={path} render={() => {
+        if (localStorage.getItem('token'))
+            return React.createElement(component)
+        else return <Redirect to="/Login"/>
+    }
+    }/>
+}
+
+const AuthRoute = ({path, component}) => {
+    return <Route path={path} render={() => {
+        if (localStorage.getItem('token'))
+            return <Redirect to="/profile"/>
+        else
+            return React.createElement(component)
+    }
+    }/>
 }
 
 export default App;
