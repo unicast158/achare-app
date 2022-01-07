@@ -1,26 +1,32 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import axios from "axios";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import AuthService from "../../serivce/Auth";
-
+import UserService from "../../serivce/user.service";
+import StorageService from "../../serivce/storage.service";
+import LoadingBar from 'react-top-loading-bar'
+import "./Login.scss"
 const Login = () => {
     const [formData, setformData] = useState({
         name: "",
         password: "",
     });
-
+    const ref = useRef(null)
     const history = useHistory();
 
     const HandleSubmit = (e) => {
         e.preventDefault();
-        AuthService.login(formData.name, formData.password).then(
-            (res) => {
-                localStorage.setItem('token',res.data.access_token);
-                alert("با موفقیت وارد شدید")
-                history.push('/profile');
-            }
-        ).catch(err=>alert(err.message))
+        ref.current.staticStart()
+        AuthService.login(formData.name, formData.password).then(res => {
+            StorageService.setToken(res.data.access_token);
+            return UserService.getUser()
+        }).then(res => {
+            StorageService.setProfile(JSON.stringify(res.data))
+            /*history.push('/profile');*/
+        }).catch(err => alert(err.message)).then(res => {
+            /*ref.current.complete()*/
+        })
     }
 
     const OnChange = (e) => {
@@ -31,6 +37,7 @@ const Login = () => {
 
     return (
         <Form onSubmit={HandleSubmit}>
+            <LoadingBar color='green' ref={ref} className="loadingTop"/>
             <Container className={'py-5 bg-light mt-5'}>
                 <h5 className={'me-5'}>اطلاعات خود را تکمیل کنید</h5>
 

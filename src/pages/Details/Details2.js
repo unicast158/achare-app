@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Switch, useParams} from "react-router-dom";
+import {Switch, useHistory, useParams} from "react-router-dom";
 import StepSingleQuestion from "./steps/StepSingleQuestion";
 import {Button} from "react-bootstrap";
 import StepMultiQuestion from "./steps/StepMultiQuestion";
@@ -26,8 +26,8 @@ const questionsCooking = [
 ]
 
 const Details = (props) => {
-    const {id: pageId} = useParams()
-    const [step, setStep] = useState(0)
+    const {id: pageId, step} = useParams()
+    const history = useHistory();
 
     useEffect(() => {
 
@@ -46,8 +46,10 @@ const Details = (props) => {
             {props.children}
             {step}
             <div>
-                <Button onClick={() => step > 0 && setStep(step - 1)}>بازگشت</Button>
-                <Button onClick={() => step < questionsCooking.length-1 && setStep(step + 1)}>مرحله بعد</Button>
+                <Button onClick={() => step > 0 && history.push(`/Details/${pageId}/${step - 1}`)}>بازگشت</Button>
+                <Button
+                    onClick={() => step < questionsCooking.length - 1 && history.push(`/Details/${pageId}/${+step + 1}`)}>مرحله
+                    بعد</Button>
             </div>
         </div>
     }

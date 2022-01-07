@@ -1,0 +1,7 @@
+.loadingTop {
+    background-color: black;
+}
+
+div:has(div.loadingTop) {
+    background: red!important;
+}
