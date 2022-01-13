@@ -6,7 +6,7 @@ import {Route, Switch} from "react-router-dom";
 
 const Header = () => {
     return (
-        <div>
+        <div id={"navbar-header"}>
             <Navbar_react/>
             <Switch>
                 <Route path={"/Details"}>

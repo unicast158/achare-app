@@ -12,6 +12,7 @@ import Register from "../../pages/Register/Register";
 import Login from "../../pages/Login/Login";
 import Profile from "../../pages/profile/profilepage";
 import StorageService from "../../serivce/storage.service";
+import "./App.scss"
 
 function App() {
     return (

@@ -63,8 +63,10 @@ const Navbar_react = () => {
                                         </Button>{' '}
                                         </Nav.Link>
                                         <Nav.Link eventKey={2} href="#memes">
-                                            <Button href={'/Register'} variant="outline-success">ثبت نام |
-                                                ورود</Button>{' '}
+                                            <Link to={'/Register'}>
+                                                <Button variant="outline-success">ثبت نام |
+                                                    ورود</Button>{' '}
+                                            </Link>
                                         </Nav.Link>
                                     </Nav>
                                 </Route>

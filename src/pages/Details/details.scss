@@ -1,0 +1,23 @@
+.preview-section {
+  padding-top: 5rem !important;
+}
+
+.preview-content {
+  padding: 3rem 5rem !important;
+}
+
+.preview-desc {
+  line-height: 2 !important;
+}
+
+body {
+  min-height: 100vh !important;
+}
+
+#main{
+  min-height: 100vh;
+}
+
+.body-preview{
+  flex-grow: 1;
+}
