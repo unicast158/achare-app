@@ -12,7 +12,8 @@ const questionsCooking = [
         options: [
             {label: "گزینه یک", value: "1"},
             {label: "گزینه دو", value: "2"},
-        ]
+        ],
+        value: "1"
     }, {
         type: "multi",
         title: "سوال دوم",
@@ -21,6 +22,7 @@ const questionsCooking = [
             {label: "گزینه دو", value: "2"},
             {label: "گزینه یک", value: "1"},
         ],
+        value: "2",
         required: true
     },
 ]
@@ -28,15 +30,25 @@ const questionsCooking = [
 const Details = (props) => {
     const {id: pageId} = useParams()
     const [step, setStep] = useState(0)
+    const [questions, setQuestions] = useState([]);
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            setQuestions(questionsCooking)
+        }, 1500)
+    }, [])
 
     useEffect(() => {
 
     }, [pageId]);
 
     const generateContent = () => {
-        const question = questionsCooking[step];
+        const question = questions[step];
         if (question.type === "single")
-            return <StepSingleQuestion question={question}/>
+            return <StepSingleQuestion question={question}
+                                       value={questions[step].value}
+                                       setValue={val => questions[step].value = val}/>
         else if (question.type === "multi")
             return <StepMultiQuestion question={question}/>
     }
@@ -47,7 +59,7 @@ const Details = (props) => {
             {step}
             <div>
                 <Button onClick={() => step > 0 && setStep(step - 1)}>بازگشت</Button>
-                <Button onClick={() => step < questionsCooking.length-1 && setStep(step + 1)}>مرحله بعد</Button>
+                <Button onClick={() => step < questions.length - 1 && setStep(step + 1)}>مرحله بعد</Button>
             </div>
         </div>
     }

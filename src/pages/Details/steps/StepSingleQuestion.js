@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const StepSingleQuestion = () => {
+const StepSingleQuestion = ({question, value, setValue}) => {
+
     return (
         <div>
-            title
-            <div >
-                <label>گزینه 1<input type="radio"/></label>
-                <label>گزینه 2<input type="radio"/></label>
-                <label>گزینه 3<input type="radio"/></label>
+            {question.title} {question.required && "*"}
+            <div>
+                {question.options.map(item =>
+                    <label>{item.label}<input onChange={() => setValue(item.value)} checked={value === item.value}
+                                              type="radio"/></label>
+                )}
             </div>
         </div>
     );
