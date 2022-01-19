@@ -1,18 +1,34 @@
 import React, {useState} from 'react';
+import {ListGroup} from "react-bootstrap";
 
 const StepSingleQuestion = ({question, value, setValue}) => {
 
     return (
         <div>
-            {question.title} {question.required && "*"}
-            <div>
-                {question.options.map(item =>
-                    <label>{item.label}<input onChange={() => setValue(item.value)} checked={value === item.value}
-                                              type="radio"/></label>
+            <p className={"mb-5"}>
+                <h5 className={"d-inline-block"}><b>{question.summery}</b></h5> <span
+                className={"text-danger"}>{question.required && "*"}</span>
+            </p>
+            <ListGroup className={"rounded-3"}>
+                {question.options.map(item => {
+                        return <ListGroup.Item className={"py-3"}><input onChange={() => setValue(item.value)}
+                                                      checked={value === item.value}
+                                                      type="radio"/><span className={"me-2"}>{item.label}</span></ListGroup.Item>
+                    }
                 )}
-            </div>
+            </ListGroup>
         </div>
     );
 };
 
 export default StepSingleQuestion;
+
+
+/*
+<ListGroup>
+    <ListGroup.Item>Cras justo odio</ListGroup.Item>
+    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+    <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+    <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+</ListGroup>*/
