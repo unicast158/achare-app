@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "dasdas",
+    "message": "dasdasd",
+    "type": "text/single/multy/textarea/",
+    "authRequired": true,
+    "defualt": "",
+    "placeHolder": ""
+  }
+]
