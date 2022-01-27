@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class ServiceService {
     static getData(q="", city=333) {
-        return axios.get('/listings/categories/limited-services/',
+        return axios.get('https://api.achareh.ir/v2/listings/categories/limited-services/',
             {
                 params: {
                     limit : 9,
