@@ -8,7 +8,6 @@
       "serviceQuestions":[
         {
           "single": true,
-          "preview": false,
           "required": true,
           "title": "Specialist",
           "summery": "به نیروی آقا نیاز دارید یا خانم؟",
@@ -31,7 +30,6 @@
         },
         {
           "single": false,
-          "preview": false,
           "required": true,
           "title": "Designer",
           "summery": "به نیروی آقا نیاز دارید یا خانم؟",
@@ -50,7 +48,6 @@
         },
         {
           "single": true,
-          "preview": false,
           "required": false,
           "title": "Strategist",
           "summery": "Future Communications Architect",
@@ -70,7 +67,6 @@
         {
           "single": true,
           "required": true,
-          "preview": false,
           "title": "Administrator",
           "summery": "Forward Solutions Developer",
           "description": "Cupiditate qui atque facere pariatur. Sint consectetur occaecati repudiandae ut illum dolorem deleniti consequatur est. Voluptas et ea quaerat nihil.\n \rEveniet debitis illo voluptas aliquid aut consequatur. Excepturi quo pariatur odio facere nam aut in natus. Nemo ipsa qui nam delectus aperiam hic praesentium rerum. Quisquam ut accusamus. Culpa illo vitae ut dolorem. Delectus ad aut harum.\n \rEum tempore id. Et esse sint ea velit assumenda similique nostrum officiis. Omnis voluptas eaque nam magnam voluptatum nam et sit. Reiciendis qui dolore aspernatur nihil. Veritatis possimus sed eos quia neque.",
@@ -89,7 +85,6 @@
         {
           "single": false,
           "required": true,
-          "preview": false,
           "title": "Orchestrator",
           "summery": "National Intranet Technician",
           "description": "Animi voluptates nostrum sit sit. Minus quia quos cumque. Dolorem ut facere tempore similique et. Quia natus et autem eum. Assumenda consectetur ut corrupti mollitia architecto dolor.\n \rIn rerum similique sint. Beatae saepe quis reiciendis aspernatur. Numquam saepe qui. Vero perferendis aut iure ratione vitae assumenda porro. Non rerum harum ut. Provident nulla rerum nesciunt et aliquam possimus rerum.\n \rOfficia eum sequi cum et accusamus. Qui aut incidunt distinctio eos perferendis cum. Eum dolores ex vitae rerum. Sapiente architecto autem.",
@@ -108,7 +103,6 @@
         {
           "single": true,
           "required": false,
-          "preview": false,
           "title": "Facilitator",
           "summery": "Investor Mobility Producer",
           "description": "Laudantium est aut. Quos ut ea rerum voluptatum iusto nulla esse repudiandae modi. Autem dolores sed sed veniam. Voluptatem voluptas corrupti ex et.\n \rId quia veritatis aut aspernatur et facilis. Itaque est quasi ratione perspiciatis pariatur molestiae nam omnis rerum. Sed dolores quae hic ducimus sed porro dolor. Voluptatum et quae numquam ipsum ut qui et. Officiis eum sit omnis totam ex labore nostrum.\n \rQuidem eveniet iure impedit vero soluta repellendus. Non fuga est expedita expedita. Sunt beatae repellendus eos. Quo ipsa inventore quis nemo aut dolor et alias.",
@@ -127,7 +121,6 @@
         {
           "single": true,
           "required": false,
-          "preview": false,
           "title": "Executive",
           "summery": "Corporate Solutions Planner",
           "description": "Sed molestias et laudantium. Porro quod aut quam aliquid ad. Officiis ad ut. Minus corporis possimus quas odio enim aperiam et. Iste autem doloribus rerum dolorem.\n \rBeatae et sit atque voluptates quas beatae in molestiae illo. Eum vero dolores. Reiciendis a quaerat ex. Veniam et vel odit ea aut adipisci aliquam maiores et.\n \rEt totam in sint. Aut asperiores dolores. Quia quisquam consequatur corrupti qui rem sint nostrum deleniti.",
@@ -146,7 +139,6 @@
         {
           "single": false,
           "required": true,
-          "preview": false,
           "title": "Developer",
           "summery": "Corporate Identity Executive",
           "description": "Non rem voluptas. Impedit praesentium laudantium ratione tempora dolores rem. Qui autem velit dignissimos est est officiis doloribus aliquid dolores. Dolor illo ut odio.\n \rQuo qui impedit rerum sint odit eum amet aspernatur temporibus. Debitis nihil velit alias laudantium. Accusantium voluptates deserunt temporibus enim. Excepturi ullam fugit quidem recusandae.\n \rEa quo est sint facilis. Assumenda quia minus sit. Porro aut nostrum culpa voluptatem assumenda unde deleniti tempore.",
@@ -166,7 +158,6 @@
           "single": false,
           "required": false,
           "title": "Orchestrator",
-          "preview": false,
           "summery": "Forward Program Administrator",
           "description": "Voluptatem fugiat architecto voluptas voluptatem autem ea unde ut. Sapiente excepturi autem ipsa totam quos consequuntur nulla molestiae quam. Quam laborum fuga eligendi blanditiis eligendi quis. Magnam dolorem sed dolorem minima non ad.\n \rEst ab quos sunt quia quia qui sapiente. Voluptates quaerat suscipit rem vel et rerum in. Est natus nisi nam consectetur odit porro excepturi. Ipsum non quia ut vero at ullam tenetur exercitationem voluptas. Cupiditate ad sed. Fugiat animi nihil rerum earum deserunt.\n \rRem earum molestias veritatis quas sequi aspernatur quia. Accusantium maxime facere est molestias ullam nisi nemo enim. A eius totam aut voluptates voluptas ea ipsa deserunt. Ducimus molestias laboriosam minus voluptas aspernatur.",
           "options": [
@@ -184,7 +175,6 @@
         {
           "single": false,
           "required": false,
-          "preview": false,
           "title": "Strategist",
           "summery": "Lead Accountability Administrator",
           "description": "Sunt ipsam reprehenderit suscipit nisi doloribus. Amet quibusdam magnam est nobis voluptatem. Aliquid iste atque voluptatem sed atque sed. Sunt qui omnis autem nihil qui voluptatem quod facilis. Et ea facilis nostrum. Iusto dignissimos cum facilis omnis dolor ipsa eius sit.\n \rCommodi modi qui atque sint nihil quisquam laboriosam corrupti incidunt. Nesciunt porro excepturi. Officia necessitatibus omnis enim aperiam ipsam harum impedit quas recusandae. Tempore non aperiam a ab molestias. Ab perspiciatis minus et optio maxime.\n \rNumquam natus adipisci rerum dolores ducimus voluptates aliquam. Sequi enim et esse sequi quis et quaerat. Molestias explicabo hic nesciunt ea cupiditate.",

@@ -5,6 +5,7 @@ import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import StepMultiQuestion from "./steps/StepMultiQuestion";
 import './details.scss'
 import axios from "axios";
+import QuestionsTemplate from "../../Components/Questions/questionsTemplate";
 
 const Details = (props) => {
     const {id: pageId, step = 0} = useParams()
@@ -14,30 +15,32 @@ const Details = (props) => {
     const [buttonName, setbuttonName] = useState("شروع کنید");
     useEffect(() => {
         setTimeout(() => {
-            axios.get("http://localhost:3001/data",{}).then((res)=>{
+            axios.get("http://localhost:3001/data", {}).then((res) => {
                 setallQuestions(res.data[0]);
                 console.log(res);
                 setQuestions(res.data[0].serviceQuestions);
                 console.log(questions);
                 console.log(allquestions);
-            }).catch(err=>{console.log(caches?.message)});
+            }).catch(err => {
+                console.log(caches?.message)
+            });
         }, 1500);
     }, [])
 
     useEffect(() => {
-        if (step != "0")
-            setbuttonName("مرحله بعد");
-        else {
+        if (!step)
             setbuttonName("شروع کنید");
+        else {
+            setbuttonName("مرحله بعد");
         }
     }, [step])
 
     const onChangeQuestionValue = (value) => {
-        console.log(value,"value");
+        console.log(value, "value");
         const lastQuestion = [...questions];
         lastQuestion[step].value = value;
         setQuestions(lastQuestion);
-        console.log(questions,"value");
+        console.log(questions, "value");
     }
     const generateContent = () => {
 
@@ -52,7 +55,7 @@ const Details = (props) => {
                     </Row>
                 </Container>
             </div>
-        if (step == 0)
+        if (!step)
             return <div className={"body-preview"} style={{backgroundColor: "#f5f5f5"}}>
                 <Container>
                     <Row className={"preview-section"}>
@@ -75,28 +78,16 @@ const Details = (props) => {
                 </Container>
             </div>
         if (question.single === true)
-            return <div className={"body-preview"} style={{backgroundColor: "#f5f5f5"}}>
-                <Container>
-                    <Row className={"preview-section"}>
-                        <Col xs={12} className={"bg-white border mt-4 preview-content"}>
-                            <StepSingleQuestion question={question}
-                                                value={questions[step].value}
-                                                setValue={onChangeQuestionValue}/>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            return <QuestionsTemplate>
+                <StepSingleQuestion question={question}
+                                    value={questions[step].value}
+                                    setValue={onChangeQuestionValue}/>
+            </QuestionsTemplate>
         else if (question.single === false)
-            return <div className={"body-preview"} style={{backgroundColor: "#f5f5f5"}}>
-                <Container>
-                    <Row className={"preview-section"}>
-                        <Col xs={12} className={"bg-white border mt-4 preview-content"}>
-                            <StepMultiQuestion question={question} value={questions[step].value}
-                                               setValue={onChangeQuestionValue}/>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            return <QuestionsTemplate>
+                <StepMultiQuestion question={question} value={questions[step].value}
+                                   setValue={onChangeQuestionValue}/>
+            </QuestionsTemplate>
     }
 
     const QuestionLayout = (props) => {
@@ -108,9 +99,10 @@ const Details = (props) => {
         return <>
             {props.children}
             <div className={"nav-down py-3 d-flex justify-content-around"}>
-                <Button style={{border:"1px solid #00bfa5",backgroundColor:"transparent", color:"#00bfa5"}} onClick={() => step > 0 && history.push(`/Details/${pageId}/${step - 1}`)}>بازگشت</Button>
-                <Button style={{backgroundColor:"#00bfa5",border:"none"}}
-                    onClick={handleNextStep}
+                <Button style={{border: "1px solid #00bfa5", backgroundColor: "transparent", color: "#00bfa5"}}
+                        onClick={() => step > 0 && history.push(`/Details/${pageId}/${step - 1}`)}>بازگشت</Button>
+                <Button style={{backgroundColor: "#00bfa5", border: "none"}}
+                        onClick={handleNextStep}
                 >{buttonName}</Button>
             </div>
         </>
