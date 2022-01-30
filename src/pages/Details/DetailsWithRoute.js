@@ -36,12 +36,11 @@ const Details = (props) => {
     }, [step])
 
     const onChangeQuestionValue = (value) => {
-        console.log(value, "value");
         const lastQuestion = [...questions];
         lastQuestion[step].value = value;
         setQuestions(lastQuestion);
-        console.log(questions, "value");
     }
+
     const generateContent = () => {
 
         const question = questions[step];

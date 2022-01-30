@@ -5,7 +5,7 @@ import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {ThemeProvider} from "react-bootstrap";
-import Details from "../../pages/Details/Details2";
+import Details from "../../pages/Details/DetailsWithRoute";
 import SearchOutput from "../../pages/SearchOutput/SearchOutput";
 import Layout from "../Layout/Layout";
 import Register from "../../pages/Register/Register";

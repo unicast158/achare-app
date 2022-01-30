@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {ListGroup} from "react-bootstrap";
+import CustomList from "./CustomList";
 
 const StepSingleQuestion = ({question, value, setValue}) => {
 
@@ -10,6 +11,7 @@ const StepSingleQuestion = ({question, value, setValue}) => {
                 className={"text-danger"}>{question.required && "*"}</span>
             </p>
             <ListGroup className={"rounded-3"}>
+                <CustomList data={question.o}/>
                 {question.options.map(item => {
                         return <ListGroup.Item className={"py-3"}><input onChange={() => setValue(item.value)}
                                                       checked={value === item.value}
