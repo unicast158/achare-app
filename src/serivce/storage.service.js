@@ -5,8 +5,10 @@ export default class StorageService {
 
     static getUser() {
         const profile = localStorage.getItem(PROFILE_KEY)
-        if (profile)
+        if (profile) {
+            debugger;
             return JSON.parse(profile)
+        }
     }
 
     static setProfile(profile) {
@@ -23,5 +25,6 @@ export default class StorageService {
 
     static removeToken() {
         localStorage.removeItem(TOKEN_KEY)
+        localStorage.removeItem(PROFILE_KEY)
     }
 }

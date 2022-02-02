@@ -5,7 +5,7 @@ import axios from "axios";
 import UserService from "../../serivce/user.service";
 import StorageService from "../../serivce/storage.service";
 
-const Profile = () => {
+const Profile = (props) => {
 
     const history = useHistory();
     const [user, setuser] = useState({});

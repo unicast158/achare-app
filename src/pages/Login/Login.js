@@ -7,8 +7,9 @@ import UserService from "../../serivce/user.service";
 import StorageService from "../../serivce/storage.service";
 import LoadingBar from 'react-top-loading-bar'
 import "./Login.scss"
+
 const Login = () => {
-    const [formData, setformData] = useState({
+    const [Dataform, setDataform] = useState({
         name: "",
         password: "",
     });
@@ -18,21 +19,25 @@ const Login = () => {
     const HandleSubmit = (e) => {
         e.preventDefault();
         ref.current.staticStart()
-        AuthService.login(formData.name, formData.password).then(res => {
+        AuthService.login(Dataform.name, Dataform.password).then(res => {
+            debugger;
             StorageService.setToken(res.data.access_token);
             return UserService.getUser()
         }).then(res => {
-            StorageService.setProfile(JSON.stringify(res.data))
-            /*history.push('/profile');*/
+            debugger;
+            StorageService.setProfile(res.data)
+            history.push('/profile',{
+                userData: res.data
+            });
         }).catch(err => alert(err.message)).then(res => {
             /*ref.current.complete()*/
         })
     }
 
     const OnChange = (e) => {
-        const newForm = {...formData};
+        const newForm = {...Dataform};
         newForm[e.target.name] = e.target.value;
-        setformData(newForm);
+        setDataform(newForm);
     }
 
     return (
@@ -46,12 +51,12 @@ const Login = () => {
                         <Row>
                             <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>نام کاربری</Form.Label>
-                                <Form.Control value={formData.name} type="text" name={'name'} onChange={OnChange}
+                                <Form.Control value={Dataform.name} type="text" name={'name'} onChange={OnChange}
                                               placeholder="نام کاربری خود را وارد نمایید"/>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formGridPassword">
                                 <Form.Label>رمز عبور</Form.Label>
-                                <Form.Control value={formData.password} type="password" name={'password'}
+                                <Form.Control value={Dataform.password} type="password" name={'password'}
                                               onChange={OnChange}
                                               placeholder="رمز عبور را وارد نمایید"/>
                             </Form.Group>
