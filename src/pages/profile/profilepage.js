@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Container, Tab, Tabs} from "react-bootstrap";
+import {Button, Container, Image, Tab, Tabs} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import UserService from "../../serivce/user.service";
 import StorageService from "../../serivce/storage.service";
 import {useDispatch} from "react-redux";
 import {logout} from "../../slice/profileSlice";
+import "./profilepage.scss"
+import ProfileChart from "../../Components/ProfileTable/ProfileChart";
 
 const Profile = (props) => {
 
@@ -26,8 +28,8 @@ const Profile = (props) => {
     // }, [])
 
     return (
-        <div>
-            <Container className={'pt-5'}>
+        <div className={"flex-grow-1 d-flex flex-column"}>
+            <Container className={'pt-5 flex-grow-1 d-flex flex-column'}>
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
@@ -35,7 +37,27 @@ const Profile = (props) => {
                     className="mb-3 justify-content-around"
                 >
                     <Tab eventKey="profile" title="پروفایل">
-                        <p>salam</p>
+                        <div className={"d-flex"}>
+                            <div className={"border d-flex flex-column"}>
+                                <div className={"flex-grow-1"}>
+                                    <Image
+                                        width={"104"}
+                                        height={"104"}
+                                        src={"https://cdn.achareh.ir/production.achareh.ir/mediaset/mediacontents/5197286f-3f82-49d1-80ad-20e5787f8173/mediaset.png"}
+                                        className={"img-fluid"}
+                                    />
+                                    <p className={"text-muted"}>شماره کاربری</p>
+                                    <p>09107675178</p>
+                                </div>
+                            </div>
+                            <div className={"flex-grow-1 d-flex flex-column pe-5"}>
+                                <ProfileChart></ProfileChart>
+                                <ProfileChart></ProfileChart>
+                                <ProfileChart></ProfileChart>
+                                <ProfileChart></ProfileChart>
+                                <ProfileChart></ProfileChart>
+                            </div>
+                        </div>
                     </Tab>
                     <Tab eventKey="transactions" title="اعتبار و تراکنش ها">
                         <p>salam khoobi</p>
