@@ -7,12 +7,15 @@ import UserService from "../../serivce/user.service";
 import StorageService from "../../serivce/storage.service";
 import LoadingBar from 'react-top-loading-bar'
 import "./Login.scss"
+import {useDispatch} from "react-redux";
+import {setProfile, setToken} from "../../slice/profileSlice";
 
 const Login = () => {
     const [Dataform, setDataform] = useState({
         name: "",
         password: "",
     });
+    const dispatch = useDispatch();
     const ref = useRef(null)
     const history = useHistory();
 
@@ -20,15 +23,10 @@ const Login = () => {
         e.preventDefault();
         ref.current.staticStart()
         AuthService.login(Dataform.name, Dataform.password).then(res => {
-            debugger;
-            StorageService.setToken(res.data.access_token);
-            return UserService.getUser()
+            dispatch(setToken(res.data.access_token))
+            return UserService.getUser(res.data.access_token)
         }).then(res => {
-            debugger;
-            StorageService.setProfile(res.data)
-            history.push('/profile',{
-                userData: res.data
-            });
+            dispatch(setProfile(res.data))
         }).catch(err => alert(err.message)).then(res => {
             /*ref.current.complete()*/
         })

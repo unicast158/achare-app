@@ -6,7 +6,6 @@ export default class StorageService {
     static getUser() {
         const profile = localStorage.getItem(PROFILE_KEY)
         if (profile) {
-            debugger;
             return JSON.parse(profile)
         }
     }

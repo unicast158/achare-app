@@ -5,10 +5,12 @@ import {faPhone} from '@fortawesome/free-solid-svg-icons'
 import {Link, Route, Switch} from "react-router-dom";
 import Nav_Menu from "../Nav/Nav";
 import StorageService from "../../../serivce/storage.service";
+import {useSelector} from "react-redux";
 
 const Navbar_react = () => {
 
     const [CitySelect, setCitySelect] = useState();
+    const username = useSelector(store=>store.profile.username);
 
     const SelectCityChange = (e) => {
         setCitySelect(e.target.value);
@@ -38,7 +40,7 @@ const Navbar_react = () => {
                                         <Nav.Link eventKey={2} href="#memes">
                                             <Dropdown>
                                                 <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-                                                    {StorageService.getUser()?.name}
+                                                    {username}
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>

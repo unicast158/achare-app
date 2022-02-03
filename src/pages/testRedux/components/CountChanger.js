@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import {decrement, increment, plusNumber} from "../../../slice/counterSlice";
+import {decrement, increment, someAction} from "../../../slice/counterSlice";
 import {useDispatch} from "react-redux";
 
 const CountChanger = () => {
 
     const dispatch = useDispatch();
     const [value, setValue] = useState(0)
+
+
+    const value1 = ""
 
     function handleAdd() {
         dispatch(increment())
@@ -18,10 +21,10 @@ const CountChanger = () => {
     }
 
     function handleAddCustom() {
-        dispatch(someAction({}))
+        dispatch(someAction(value))
     }
     function handleRemoveCustom() {
-        dispatch(plusNumber(value))
+        dispatch(someAction(value))
     }
 
     return (
@@ -29,8 +32,8 @@ const CountChanger = () => {
             <button onClick={handleAdd}>plus</button>
             <button onClick={handleDec}>minus</button>
             <input value={value} onChange={e => setValue(e.target.value)}/>
-            <button onClick={handleCustom}>add custom</button>
-            <button onClick={handleCustom}>minus custom</button>
+            <button onClick={handleAddCustom}>add custom</button>
+            <button onClick={handleRemoveCustom}>minus custom</button>
         </div>
     );
 };

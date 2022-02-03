@@ -4,23 +4,26 @@ import {useHistory} from "react-router-dom";
 import axios from "axios";
 import UserService from "../../serivce/user.service";
 import StorageService from "../../serivce/storage.service";
+import {useDispatch} from "react-redux";
+import {logout} from "../../slice/profileSlice";
 
 const Profile = (props) => {
 
+    console.log(props);
     const history = useHistory();
+    const dispatch = useDispatch();
     const [user, setuser] = useState({});
     const [key, setKey] = useState('home');
 
     const HandleLogOut = (e) => {
-        StorageService.removeToken();
-        history.push('/Login');
+        dispatch(logout());
     };
 
-    useEffect(() => {
-        UserService.getUser().then((res) => {
-            setuser(res.data);
-        })
-    }, [])
+    // useEffect(() => {
+    //     UserService.getUser().then((res) => {
+    //         setuser(res.data);
+    //     })
+    // }, [])
 
     return (
         <div>
