@@ -9,6 +9,7 @@ import LoadingBar from 'react-top-loading-bar'
 import "./Login.scss"
 import {useDispatch} from "react-redux";
 import {setProfile, setToken} from "../../slice/profileSlice";
+import FakeUserService from "../../serivce/fakeUser.service";
 
 const Login = () => {
     const [Dataform, setDataform] = useState({
@@ -24,8 +25,9 @@ const Login = () => {
         ref.current.staticStart()
         AuthService.login(Dataform.name, Dataform.password).then(res => {
             dispatch(setToken(res.data.access_token))
-            return UserService.getUser(res.data.access_token)
+            return FakeUserService.getFakeUser()
         }).then(res => {
+            debugger;
             dispatch(setProfile(res.data))
         }).catch(err => alert(err.message)).then(res => {
             /*ref.current.complete()*/

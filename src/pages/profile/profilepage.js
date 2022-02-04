@@ -1,31 +1,84 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Container, Image, Tab, Tabs} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
-import axios from "axios";
-import UserService from "../../serivce/user.service";
-import StorageService from "../../serivce/storage.service";
 import {useDispatch} from "react-redux";
 import {logout} from "../../slice/profileSlice";
-import "./profilepage.scss"
-import ProfileChart from "../../Components/ProfileTable/ProfileChart";
+import "./profilepage.scss";
+import { insertItem, getItems, updateItem, deleteItem } from "../../serivce/testforkendo/services";
+import { MyCommandCell } from "../../serivce/testforkendo/myCommandCell";
+import { Grid, GridColumn as Column, GridToolbar } from "@progress/kendo-react-grid";
+const editField = "inEdit";
 
 const Profile = (props) => {
 
     console.log(props);
-    const history = useHistory();
     const dispatch = useDispatch();
-    const [user, setuser] = useState({});
+    const [data, setData] = React.useState([]);
     const [key, setKey] = useState('home');
+
+    React.useEffect(() => {
+        let newItems = getItems();
+        setData(newItems);
+    }, []); // modify the data in the store, db etc
+
+    const remove = dataItem => {
+        const newData = deleteItem(dataItem);
+        setData(newData);
+    };
+
+    const add = dataItem => {
+        dataItem.inEdit = true;
+        const newData = insertItem(dataItem);
+        setData(newData);
+    };
+
+    const update = dataItem => {
+        dataItem.inEdit = false;
+        const newData = updateItem(dataItem);
+        setData(newData);
+    }; // Local state operations
+
+
+    const discard = () => {
+        const newData = [...data];
+        newData.splice(0, 1);
+        setData(newData);
+    };
+
+    const cancel = dataItem => {
+        const originalItem = getItems().find(p => p.key === dataItem.key);
+        const newData = data.map(item => item.key === originalItem.key ? originalItem : item);
+        setData(newData);
+    };
+
+    const enterEdit = dataItem => {
+        setData(data.map(item => item.key === dataItem.key ? {
+            ...item,
+            inEdit: true
+        } : item));
+    };
+
+    const itemChange = event => {
+        const newData = data.map(item => item.key === event.dataItem.key ? {
+            ...item,
+            [event.field || '']: event.value
+        } : item);
+        setData(newData);
+    };
+
+    const addNew = () => {
+        const newDataItem = {
+            inEdit: true,
+            Discontinued: false
+        };
+        setData([newDataItem, ...data]);
+    };
+
+    const CommandCell = props => <MyCommandCell {...props} edit={enterEdit} remove={remove} add={add} discard={discard}
+                                                update={update} cancel={cancel} editField={editField}/>;
 
     const HandleLogOut = (e) => {
         dispatch(logout());
     };
-
-    // useEffect(() => {
-    //     UserService.getUser().then((res) => {
-    //         setuser(res.data);
-    //     })
-    // }, [])
 
     return (
         <div className={"flex-grow-1 d-flex flex-column"}>
@@ -51,11 +104,16 @@ const Profile = (props) => {
                                 </div>
                             </div>
                             <div className={"flex-grow-1 d-flex flex-column pe-5"}>
-                                <ProfileChart></ProfileChart>
-                                <ProfileChart></ProfileChart>
-                                <ProfileChart></ProfileChart>
-                                <ProfileChart></ProfileChart>
-                                <ProfileChart></ProfileChart>
+                                <Grid style={{
+                                    height: "420px"
+                                }} data={data} onItemChange={itemChange} editField={editField}>
+                                    <Column field="key" title="عنوان" width="150px" editable={false} className={"text-muted"} />
+                                    <Column field="value" title="مقدار" width="200px" />
+                                    {/*<Column field="FirstOrderedOn" title="First Ordered" editor="date" format="{0:d}" width="150px" />
+                                    <Column field="UnitsInStock" title="Units" width="120px" editor="numeric" />
+                                    <Column field="Discontinued" title="Discontinued" editor="boolean" />*/}
+                                    <Column cell={CommandCell} width="200px" />
+                                </Grid>
                             </div>
                         </div>
                     </Tab>
