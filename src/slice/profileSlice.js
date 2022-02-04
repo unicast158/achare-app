@@ -17,14 +17,13 @@ let reducers = {
         store.email = "";
         StorageService.removeToken()
     },
-    increment: (store, action) => {
-        store.counterValue += 1
-    },
-    decrement: (store, action) => {
-        store.counterValue -= 1
-    },
-    someAction: (store, action) => {
-        store.counterValue = store.counterValue + +action.payload
+    KendoUpdate: (store, action) => {
+        let obj = {};
+        action.payload.map(({filed, value}) => {
+            return obj[filed] = value;
+        })
+        store.UserObj = obj;
+        StorageService.setProfile(obj)
     }
 };
 const slice = createSlice({
@@ -38,6 +37,6 @@ const slice = createSlice({
     reducers: reducers
 })
 
-export const {setToken, setProfile,logout} = slice.actions
+export const {setToken, setProfile, logout, KendoUpdate} = slice.actions
 
 export default slice.reducer

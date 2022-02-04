@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Container, Image, Tab, Tabs} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {logout} from "../../slice/profileSlice";
+import {KendoUpdate, logout} from "../../slice/profileSlice";
 import "./profilepage.scss";
 import { insertItem, getItems, updateItem, deleteItem } from "../../serivce/testforkendo/services";
 import { MyCommandCell } from "../../serivce/testforkendo/myCommandCell";
 import { Grid, GridColumn as Column, GridToolbar } from "@progress/kendo-react-grid";
+import StorageService from "../../serivce/storage.service";
 const editField = "inEdit";
 
 const Profile = (props) => {
@@ -32,9 +33,11 @@ const Profile = (props) => {
     };
 
     const update = dataItem => {
+        debugger;
         dataItem.inEdit = false;
         const newData = updateItem(dataItem);
         setData(newData);
+        dispatch(KendoUpdate(data));
     }; // Local state operations
 
 
@@ -124,7 +127,9 @@ const Profile = (props) => {
                         <p>salam che2ri</p>
                     </Tab>
                     <Tab eventKey="address" title="مدیریت آدرس ها">
-                        <p>salam che2ri</p>
+                        <div>
+                            {StorageService.getAddress()}
+                        </div>
                     </Tab>
                     <Tab eventKey="friends" title="معرفی به دوستان">
                         <p>salam che2ri</p>

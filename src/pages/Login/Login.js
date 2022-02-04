@@ -27,7 +27,6 @@ const Login = () => {
             dispatch(setToken(res.data.access_token))
             return FakeUserService.getFakeUser()
         }).then(res => {
-            debugger;
             dispatch(setProfile(res.data))
         }).catch(err => alert(err.message)).then(res => {
             /*ref.current.complete()*/

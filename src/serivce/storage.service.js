@@ -10,6 +10,13 @@ export default class StorageService {
         }
     }
 
+    static getAddress() {
+        const profile = localStorage.getItem(PROFILE_KEY)
+        if (profile) {
+            return (JSON.parse(profile)).address
+        }
+    }
+
     static setProfile(profile) {
         localStorage.setItem(PROFILE_KEY, JSON.stringify(profile))
     }

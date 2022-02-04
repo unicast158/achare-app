@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 
 export const MyCommandCell = props => {
     const {
@@ -10,6 +11,7 @@ export const MyCommandCell = props => {
         <button className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-save-command"
                 onClick={(data) => {
                     isNewItem ? props.add(dataItem) : props.update(dataItem);
+                    axios.post("http://localhost:3000/userFakeData")
                     return;
                 }}>
             {isNewItem ? "Add" : "ثبت"}
