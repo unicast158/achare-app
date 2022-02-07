@@ -21,12 +21,20 @@ export default class StorageService {
         localStorage.setItem(PROFILE_KEY, JSON.stringify(profile))
     }
 
+    static setUserInfo(profile) {
+        localStorage.setItem("KendoInformation", JSON.stringify(profile))
+    }
+
     static setToken(token) {
         localStorage.setItem(TOKEN_KEY, token)
     }
 
     static getToken() {
         return localStorage.getItem(TOKEN_KEY)
+    }
+
+    static getUserForKendo() {
+        return JSON.parse(localStorage.getItem("KendoInformation"));
     }
 
     static removeToken() {

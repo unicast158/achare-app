@@ -18,6 +18,7 @@ let reducers = {
         StorageService.removeToken()
     },
     KendoUpdate: (store, action) => {
+        debugger;
         let obj = {};
         action.payload.map(({filed, value}) => {
             return obj[filed] = value;
@@ -32,7 +33,7 @@ const slice = createSlice({
         username: StorageService.getUser()?.name,
         token: StorageService.getToken(),
         email: StorageService.getUser()?.email,
-        pageTitle: "profile information"
+        pageTitle: "profile information",
     },
     reducers: reducers
 })

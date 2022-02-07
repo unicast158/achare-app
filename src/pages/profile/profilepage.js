@@ -3,10 +3,12 @@ import {Button, Container, Image, Tab, Tabs} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {KendoUpdate, logout} from "../../slice/profileSlice";
 import "./profilepage.scss";
-import { insertItem, getItems, updateItem, deleteItem } from "../../serivce/testforkendo/services";
-import { MyCommandCell } from "../../serivce/testforkendo/myCommandCell";
-import { Grid, GridColumn as Column, GridToolbar } from "@progress/kendo-react-grid";
+import {insertItem, getItems, updateItem, deleteItem} from "../../serivce/testforkendo/services";
+import {MyCommandCell} from "../../serivce/testforkendo/myCommandCell";
+import {Grid, GridColumn as Column, GridToolbar} from "@progress/kendo-react-grid";
 import StorageService from "../../serivce/storage.service";
+import FakeUserService from "../../serivce/fakeUser.service";
+
 const editField = "inEdit";
 
 const Profile = (props) => {
@@ -18,6 +20,7 @@ const Profile = (props) => {
 
     React.useEffect(() => {
         let newItems = getItems();
+        debugger;
         setData(newItems);
     }, []); // modify the data in the store, db etc
 
@@ -33,7 +36,6 @@ const Profile = (props) => {
     };
 
     const update = dataItem => {
-        debugger;
         dataItem.inEdit = false;
         const newData = updateItem(dataItem);
         setData(newData);
@@ -110,12 +112,13 @@ const Profile = (props) => {
                                 <Grid style={{
                                     height: "420px"
                                 }} data={data} onItemChange={itemChange} editField={editField}>
-                                    <Column field="key" title="عنوان" width="150px" editable={false} className={"text-muted"} />
-                                    <Column field="value" title="مقدار" width="200px" />
+                                    <Column field="key" title="عنوان" width="150px" editable={false}
+                                            className={"text-muted"}/>
+                                    <Column field="value" title="مقدار" width="200px"/>
                                     {/*<Column field="FirstOrderedOn" title="First Ordered" editor="date" format="{0:d}" width="150px" />
                                     <Column field="UnitsInStock" title="Units" width="120px" editor="numeric" />
                                     <Column field="Discontinued" title="Discontinued" editor="boolean" />*/}
-                                    <Column cell={CommandCell} width="200px" />
+                                    <Column cell={CommandCell} width="200px"/>
                                 </Grid>
                             </div>
                         </div>

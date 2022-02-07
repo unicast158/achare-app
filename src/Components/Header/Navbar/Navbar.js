@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Dropdown, Form, Image, Nav, Navbar, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPhone} from '@fortawesome/free-solid-svg-icons'
@@ -10,7 +10,12 @@ import {useSelector} from "react-redux";
 const Navbar_react = () => {
 
     const [CitySelect, setCitySelect] = useState();
-    const username = useSelector(store=>store.profile.username);
+    const [username, setusername] = useState("");
+    const storeRedux = useSelector(store => store);
+    useEffect(() => {
+        debugger;
+        setusername(storeRedux.profile.UserObj ? storeRedux.profile.UserObj.name : storeRedux.profile.username);
+    }, [storeRedux])
 
     const SelectCityChange = (e) => {
         setCitySelect(e.target.value);

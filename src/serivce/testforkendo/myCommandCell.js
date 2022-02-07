@@ -11,8 +11,8 @@ export const MyCommandCell = props => {
         <button className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-grid-save-command"
                 onClick={(data) => {
                     isNewItem ? props.add(dataItem) : props.update(dataItem);
-                    axios.post("http://localhost:3000/userFakeData")
-                    return;
+
+                    return axios.post("http://localhost:3001/userFakeData");
                 }}>
             {isNewItem ? "Add" : "ثبت"}
         </button>
