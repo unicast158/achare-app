@@ -257,5 +257,11 @@
       "id": "5"
     }
   ],
-  "userFakeData": {}
+  "userFakeData": {
+    "Gender": "مرد",
+    "address": "تهران، میدان خراسان، فرهنگسرای خاوران",
+    "birthday": "1379",
+    "lastname": "سرآبادانی",
+    "name": "علیرضا"
+  }
 }

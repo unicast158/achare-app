@@ -4,7 +4,7 @@ const TOKEN_KEY = "token";
 export default class StorageService {
 
     static getUser() {
-        const profile = localStorage.getItem(PROFILE_KEY)
+        const profile = localStorage.getItem(PROFILE_KEY);
         if (profile) {
             return JSON.parse(profile)
         }
@@ -40,5 +40,6 @@ export default class StorageService {
     static removeToken() {
         localStorage.removeItem(TOKEN_KEY)
         localStorage.removeItem(PROFILE_KEY)
+        localStorage.removeItem("KendoInformation")
     }
 }

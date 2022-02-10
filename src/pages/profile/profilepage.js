@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Container, Image, Tab, Tabs} from "react-bootstrap";
-import {useDispatch} from "react-redux";
+import {Alert, Button, Container, Image, Tab, Table, Tabs} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
 import {KendoUpdate, logout} from "../../slice/profileSlice";
 import "./profilepage.scss";
-import {insertItem, getItems, updateItem, deleteItem} from "../../serivce/testforkendo/services";
-import {MyCommandCell} from "../../serivce/testforkendo/myCommandCell";
-import {Grid, GridColumn as Column, GridToolbar} from "@progress/kendo-react-grid";
 import StorageService from "../../serivce/storage.service";
-import FakeUserService from "../../serivce/fakeUser.service";
+import EasyEdit from 'react-easy-edit';
+import UserService from "../../serivce/user.service";
 
 const editField = "inEdit";
 
@@ -15,71 +13,16 @@ const Profile = (props) => {
 
     console.log(props);
     const dispatch = useDispatch();
-    const [data, setData] = React.useState([]);
     const [key, setKey] = useState('home');
+    const store = useSelector((store => store.profile));
+    /*const [Data, setData] = useState();*/
+    const [Data, setData] = useState(StorageService.getUser()?.name);
 
-    React.useEffect(() => {
-        let newItems = getItems();
-        debugger;
-        setData(newItems);
-    }, []); // modify the data in the store, db etc
-
-    const remove = dataItem => {
-        const newData = deleteItem(dataItem);
-        setData(newData);
-    };
-
-    const add = dataItem => {
-        dataItem.inEdit = true;
-        const newData = insertItem(dataItem);
-        setData(newData);
-    };
-
-    const update = dataItem => {
-        dataItem.inEdit = false;
-        const newData = updateItem(dataItem);
-        setData(newData);
-        dispatch(KendoUpdate(data));
-    }; // Local state operations
-
-
-    const discard = () => {
-        const newData = [...data];
-        newData.splice(0, 1);
-        setData(newData);
-    };
-
-    const cancel = dataItem => {
-        const originalItem = getItems().find(p => p.key === dataItem.key);
-        const newData = data.map(item => item.key === originalItem.key ? originalItem : item);
-        setData(newData);
-    };
-
-    const enterEdit = dataItem => {
-        setData(data.map(item => item.key === dataItem.key ? {
-            ...item,
-            inEdit: true
-        } : item));
-    };
-
-    const itemChange = event => {
-        const newData = data.map(item => item.key === event.dataItem.key ? {
-            ...item,
-            [event.field || '']: event.value
-        } : item);
-        setData(newData);
-    };
-
-    const addNew = () => {
-        const newDataItem = {
-            inEdit: true,
-            Discontinued: false
-        };
-        setData([newDataItem, ...data]);
-    };
-
-    const CommandCell = props => <MyCommandCell {...props} edit={enterEdit} remove={remove} add={add} discard={discard}
-                                                update={update} cancel={cancel} editField={editField}/>;
+    const save = (value) => {
+        UserService.patchData({name: value}).then(res => {
+            debugger;
+        }).catch(err => console.log(err?.message));
+    }
 
     const HandleLogOut = (e) => {
         dispatch(logout());
@@ -109,22 +52,71 @@ const Profile = (props) => {
                                 </div>
                             </div>
                             <div className={"flex-grow-1 d-flex flex-column pe-5"}>
-                                <Grid style={{
-                                    height: "420px"
-                                }} data={data} onItemChange={itemChange} editField={editField}>
-                                    <Column field="key" title="عنوان" width="150px" editable={false}
-                                            className={"text-muted"}/>
-                                    <Column field="value" title="مقدار" width="200px"/>
-                                    {/*<Column field="FirstOrderedOn" title="First Ordered" editor="date" format="{0:d}" width="150px" />
-                                    <Column field="UnitsInStock" title="Units" width="120px" editor="numeric" />
-                                    <Column field="Discontinued" title="Discontinued" editor="boolean" />*/}
-                                    <Column cell={CommandCell} width="200px"/>
-                                </Grid>
+                                <Alert variant={'info'}>
+                                    برای ویرایش هر فیلد روی آن کلیک نمایید
+                                </Alert>
+                                <div className={"d-flex align-items-center"}>
+                                    <Table stripped bordered hover size="sm" className={"w-50"}>
+                                        <tbody>
+                                        <tr>
+                                            <th width="170">نام :</th>
+                                            <td>
+                                                <EasyEdit
+                                                    value={Data}
+                                                    key={"name"}
+                                                    type="text"
+                                                    onSave={save}
+                                                    saveButtonLabel="ثبت"
+                                                    cancelButtonLabel="انصراف"
+                                                    attributes={{name: "name-input", id: 1}}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th width="170">نام خانوادگی :</th>
+                                            <td>
+                                                <EasyEdit
+                                                    value={StorageService.getUser()?.lastname}
+                                                    type="text"
+                                                    saveButtonLabel="ثبت"
+                                                    cancelButtonLabel="انصراف"
+                                                    attributes={{name: "lastname-input", id: 2}}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th width="170">تاریخ تولد :</th>
+                                            <td>
+                                                <EasyEdit
+                                                    value={StorageService.getUser()?.birthday}
+                                                    type="text"
+                                                    saveButtonLabel="ثبت"
+                                                    cancelButtonLabel="انصراف"
+                                                    attributes={{name: "birthday-input", id: 3}}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th width="170">جنسیت :</th>
+                                            <td>
+                                                <EasyEdit
+                                                    attributes={{class: "ms-2"}}
+                                                    type="radio"
+                                                    saveButtonLabel="ثبت"
+                                                    cancelButtonLabel="انصراف"
+                                                    value={StorageService.getUser()?.Gender}
+                                                    options={[
+                                                        {label: 'مرد', value: true}]}
+                                                />
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </Table>
+                                </div>
                             </div>
                         </div>
                     </Tab>
                     <Tab eventKey="transactions" title="اعتبار و تراکنش ها">
-                        <p>salam khoobi</p>
                     </Tab>
                     <Tab eventKey="specialists" title="متخصص های منتخب">
                         <p>salam che2ri</p>

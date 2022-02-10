@@ -25,7 +25,7 @@ const Login = () => {
         ref.current.staticStart()
         AuthService.login(Dataform.name, Dataform.password).then(res => {
             dispatch(setToken(res.data.access_token))
-            return FakeUserService.getFakeUser()
+            return UserService.GetFakeUser()
         }).then(res => {
             dispatch(setProfile(res.data))
         }).catch(err => alert(err.message)).then(res => {

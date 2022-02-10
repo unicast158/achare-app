@@ -8,4 +8,12 @@ export default class UserService {
             }
         })
     }
+
+    static GetFakeUser(){
+        return http.get("http://localhost:3001/userFakeData")
+    }
+
+    static patchData(body){
+        return http.put("http://localhost:3001/userFakeData",body)
+    }
 }

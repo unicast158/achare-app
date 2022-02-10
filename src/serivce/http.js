@@ -13,4 +13,5 @@ export default {
     post: instance.post,
     put: instance.put,
     delete: instance.delete,
+    patch: instance.patch,
 }

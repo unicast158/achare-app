@@ -18,7 +18,6 @@ let reducers = {
         StorageService.removeToken()
     },
     KendoUpdate: (store, action) => {
-        debugger;
         let obj = {};
         action.payload.map(({filed, value}) => {
             return obj[filed] = value;

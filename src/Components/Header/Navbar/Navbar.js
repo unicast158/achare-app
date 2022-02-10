@@ -13,7 +13,6 @@ const Navbar_react = () => {
     const [username, setusername] = useState("");
     const storeRedux = useSelector(store => store);
     useEffect(() => {
-        debugger;
         setusername(storeRedux.profile.UserObj ? storeRedux.profile.UserObj.name : storeRedux.profile.username);
     }, [storeRedux])
 
