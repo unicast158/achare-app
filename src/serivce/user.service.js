@@ -14,6 +14,6 @@ export default class UserService {
     }
 
     static patchData(body){
-        return http.put("http://localhost:3001/userFakeData",body)
+        return http.patch("http://localhost:3001/userFakeData",body)
     }
 }

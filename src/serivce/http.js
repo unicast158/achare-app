@@ -8,10 +8,16 @@ const instance = axios.create({
     }
 })
 
+const instanceSecond = axios.create({
+    headers: {
+        "Access-Control-Allow-Origin": "*"
+    }
+})
+
 export default {
     get: instance.get,
     post: instance.post,
     put: instance.put,
     delete: instance.delete,
-    patch: instance.patch,
+    patch: instanceSecond.patch,
 }

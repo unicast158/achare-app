@@ -19,8 +19,8 @@ const Profile = (props) => {
     const [Data, setData] = useState(StorageService.getUser()?.name);
 
     const save = (value) => {
+        debugger;
         UserService.patchData({name: value}).then(res => {
-            debugger;
         }).catch(err => console.log(err?.message));
     }
 
@@ -78,6 +78,7 @@ const Profile = (props) => {
                                                 <EasyEdit
                                                     value={StorageService.getUser()?.lastname}
                                                     type="text"
+                                                    onSave={save}
                                                     saveButtonLabel="ثبت"
                                                     cancelButtonLabel="انصراف"
                                                     attributes={{name: "lastname-input", id: 2}}
@@ -90,6 +91,7 @@ const Profile = (props) => {
                                                 <EasyEdit
                                                     value={StorageService.getUser()?.birthday}
                                                     type="text"
+                                                    onSave={save}
                                                     saveButtonLabel="ثبت"
                                                     cancelButtonLabel="انصراف"
                                                     attributes={{name: "birthday-input", id: 3}}
@@ -102,6 +104,7 @@ const Profile = (props) => {
                                                 <EasyEdit
                                                     attributes={{class: "ms-2"}}
                                                     type="radio"
+                                                    onSave={save}
                                                     saveButtonLabel="ثبت"
                                                     cancelButtonLabel="انصراف"
                                                     value={StorageService.getUser()?.Gender}
