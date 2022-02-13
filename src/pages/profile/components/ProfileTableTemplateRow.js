@@ -1,24 +1,30 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Button} from "react-bootstrap";
-import ServiceService from "../../../serivce/service.service";
 import UserService from "../../../serivce/user.service";
+import StorageService from "../../../serivce/storage.service";
+import {useDispatch} from "react-redux";
+import {setProfile} from "../../../slice/profileSlice";
 
 const ProfileTableTemplateRow = ({children, name}) => {
 
     const [Update, setUpdate] = useState(false);
     const [InputData, setInputData] = useState(children);
+    const dispatch = useDispatch();
 
     const HandleUpdate = (e) => {
         setUpdate(true)
     };
 
     const HandleSubmitUpdate = (e) => {
-        debugger;
-        e.preventDefault()
         setUpdate(false)
         UserService.patchData({[name]: InputData}).then(
             res => {
-                console.log('ali')
+                StorageService.setProfile(res.data)
+                dispatch(setProfile(res.data))
+            }
+        ).catch(
+            err => {
+                console.log(err?.message)
             }
         )
     }
@@ -30,11 +36,11 @@ const ProfileTableTemplateRow = ({children, name}) => {
     const checkUpdate = () => {
         if (Update) {
             return (
-                <form onSubmit={HandleSubmitUpdate}>
+                <>
                     <input onChange={HandleOnChange} value={InputData}/>
-                    <Button className={`me-auto`} type={"submit"} variant={"info"}
+                    <Button className={`me-auto`} onClick={HandleSubmitUpdate} variant={"info"}
                             size={"sm"}>ثبت</Button>
-                </form>
+                </>
             )
         } else {
             return (

@@ -21,10 +21,6 @@ export default class StorageService {
         localStorage.setItem(PROFILE_KEY, JSON.stringify(profile))
     }
 
-    static setUserInfo(profile) {
-        localStorage.setItem("KendoInformation", JSON.stringify(profile))
-    }
-
     static setToken(token) {
         localStorage.setItem(TOKEN_KEY, token)
     }
