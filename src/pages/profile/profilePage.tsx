@@ -7,9 +7,7 @@ import StorageService from "../../serivce/storage.service";
 import UserService from "../../serivce/user.service";
 import ProfileTableTemplateRow from "./components/ProfileTableTemplateRow";
 
-const Profile = (props) => {
-
-    console.log(props);
+const Profile = () => {
     const dispatch = useDispatch();
     const [key, setKey] = useState('home');
     const store = useSelector((store => store.profile));
@@ -19,11 +17,6 @@ const Profile = (props) => {
     useEffect(() => {
         setData(StorageService.getUser());
     }, [store])
-
-    const save = (value) => {
-        UserService.patchData({name: value}).then(res => {
-        }).catch(err => console.log(err?.message));
-    }
 
     const HandleLogOut = (e) => {
         dispatch(logout());
@@ -62,19 +55,19 @@ const Profile = (props) => {
                                         <tr>
                                             <th width="170">نام :</th>
                                             <td>
-                                                <ProfileTableTemplateRow name={'name'}>{Data?.name}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow key={'name'} >{Data?.name}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th width="170">نام خانوادگی :</th>
                                             <td>
-                                                <ProfileTableTemplateRow name={'lastname'}>{Data?.lastname}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow>{Data?.lastname}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th width="170">تاریخ تولد :</th>
                                             <td>
-                                                <ProfileTableTemplateRow name={'birthday'}>{Data?.birthday}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow>{Data?.birthday}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         </tbody>

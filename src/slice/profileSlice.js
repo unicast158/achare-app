@@ -37,6 +37,6 @@ const slice = createSlice({
     reducers: reducers
 })
 
-export const {setToken, setProfile, logout, KendoUpdate} = slice.actions
+export const {setToken, setProfile, logout} = slice.actions
 
 export default slice.reducer
