@@ -8,7 +8,8 @@ let reducers = {
     },
     setProfile: (store, action) => {
         store.username = action.payload.name;
-        store.email = action.payload.email
+        store.lastname = action.payload.lastname;
+        store.birthday = action.payload.birthday
         StorageService.setProfile(action.payload)
     },
     logout: (store) => {

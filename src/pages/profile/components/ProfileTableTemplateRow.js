@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from "react-bootstrap";
 import UserService from "../../../serivce/user.service";
 import StorageService from "../../../serivce/storage.service";
@@ -8,25 +8,37 @@ import {setProfile} from "../../../slice/profileSlice";
 const ProfileTableTemplateRow = ({children, name}) => {
 
     const [Update, setUpdate] = useState(false);
-    const [InputData, setInputData] = useState(children);
+    const [InputData, setInputData] = useState('');
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setInputData(children)
+    }, [children])
 
     const HandleUpdate = (e) => {
         setUpdate(true)
     };
 
+    const CancelUpdate = () => {
+        setUpdate(false)
+    }
+
     const HandleSubmitUpdate = (e) => {
         setUpdate(false)
-        UserService.patchData({[name]: InputData}).then(
-            res => {
-                StorageService.setProfile(res.data)
-                dispatch(setProfile(res.data))
-            }
-        ).catch(
-            err => {
-                console.log(err?.message)
-            }
-        )
+        if(InputData.length){
+            UserService.patchData({[name]: InputData}).then(
+                res => {
+                    StorageService.setProfile(res.data)
+                    dispatch(setProfile(res.data))
+                }
+            ).catch(
+                err => {
+                    console.log(err?.message)
+                }
+            )
+        } else {
+            alert("Enter Somethings")
+        }
     }
 
     const HandleOnChange = (e) => {
@@ -40,6 +52,8 @@ const ProfileTableTemplateRow = ({children, name}) => {
                     <input onChange={HandleOnChange} value={InputData}/>
                     <Button className={`me-auto`} onClick={HandleSubmitUpdate} variant={"info"}
                             size={"sm"}>ثبت</Button>
+                    <Button className={`me-auto`} onClick={CancelUpdate} variant={"secondary"}
+                            size={"sm"}>انصراف</Button>
                 </>
             )
         } else {
