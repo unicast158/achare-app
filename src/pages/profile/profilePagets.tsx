@@ -6,21 +6,27 @@ import "./profilepage.scss";
 import StorageService from "../../serivce/storage.service";
 import UserService from "../../serivce/user.service";
 import ProfileTableTemplateRow from "./components/ProfileTableTemplateRow";
+import {useAppSelector, useAppDispatch} from '../../Hook/hooks'
 
-const Profile = () => {
-    const dispatch = useDispatch();
+const ProfileTs = () => {
+    const dispatch = useAppDispatch();
     const [key, setKey] = useState('home');
-    const store = useSelector((store => store.profile));
-    /*const [Data, setData] = useState();*/
-    const [Data, setData] = useState({});
+    const store = useAppSelector((store => store.profile));
+    const [Data, setData] = useState({
+        name: undefined,
+        lastname: undefined,
+        birthday: undefined
+    });
 
     useEffect(() => {
         setData(StorageService.getUser());
     }, [store])
 
+    // @ts-ignore
     const HandleLogOut = (e) => {
         dispatch(logout());
     };
+
 
     return (
         <div className={"flex-grow-1 d-flex flex-column"}>
@@ -28,7 +34,7 @@ const Profile = () => {
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
-                    onSelect={(k) => setKey(k)}
+                    onSelect={(k:any) => setKey(k)}
                     className="mb-3 justify-content-around"
                 >
                     <Tab eventKey="profile" title="پروفایل">
@@ -50,24 +56,27 @@ const Profile = () => {
                                     برای ویرایش هر فیلد روی آن کلیک نمایید
                                 </Alert>
                                 <div className={"d-flex align-items-center"}>
-                                    <Table stripped bordered hover size="sm" className={"w-50"}>
+                                    <Table striped bordered hover size="sm" className={"w-50"}>
                                         <tbody>
                                         <tr>
-                                            <th width="170">نام :</th>
+                                            <th style={{width:170}}>نام :</th>
                                             <td>
-                                                <ProfileTableTemplateRow key={'name'} >{Data?.name}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow
+                                                    name={'name'}>{Data?.name}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th width="170">نام خانوادگی :</th>
+                                            <th style={{width:170}}>نام خانوادگی :</th>
                                             <td>
-                                                <ProfileTableTemplateRow>{Data?.lastname}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow
+                                                    name={'lastname'}>{Data?.lastname}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th width="170">تاریخ تولد :</th>
+                                            <th style={{width:170}}>تاریخ تولد :</th>
                                             <td>
-                                                <ProfileTableTemplateRow>{Data?.birthday}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow
+                                                    name={'birthday'}>{Data?.birthday}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -96,4 +105,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfileTs;

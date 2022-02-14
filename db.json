@@ -260,8 +260,9 @@
   "userFakeData": {
     "Gender": "مرد",
     "address": "تهران، میدان خراسان، فرهنگسرای خاوران",
-    "birthday": "1377",
-    "lastname": "خوبی",
-    "name": "داداشمی"
+    "birthday": "1355",
+    "lastname": "رضایی",
+    "name": "رضا",
+    "undefined": "رضا"
   }
 }

@@ -10,7 +10,7 @@ import SearchOutput from "../../pages/SearchOutput/SearchOutput";
 import Layout from "../Layout/Layout";
 import Register from "../../pages/Register/Register";
 import Login from "../../pages/Login/Login";
-import Profile from "../../pages/profile/profilepage";
+import ProfileTs from "../../pages/profile/profilePagets";
 import "./App.scss"
 import {useSelector} from "react-redux";
 
@@ -29,7 +29,7 @@ function App() {
                         <Route exact component={SearchOutput} path={"/SearchOutput/:city/:q"}/>
                         <AuthRoute isAuthenticated={isAuthenticated} exact component={Register} path={"/Register"}/>
                         <AuthRoute isAuthenticated={isAuthenticated} exact component={Login} path={"/Login"}/>
-                        <PrivateRoute isAuthenticated={isAuthenticated} exact component={Profile} path={"/profile"}/>
+                        <PrivateRoute isAuthenticated={isAuthenticated} exact component={ProfileTs} path={"/profile"}/>
                     </Switch>
                 </Layout>
             </BrowserRouter>

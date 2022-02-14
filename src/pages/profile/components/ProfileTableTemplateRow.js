@@ -24,8 +24,8 @@ const ProfileTableTemplateRow = ({children, name}) => {
     }
 
     const HandleSubmitUpdate = (e) => {
-        setUpdate(false)
         if(InputData.length){
+            setUpdate(false)
             UserService.patchData({[name]: InputData}).then(
                 res => {
                     StorageService.setProfile(res.data)
