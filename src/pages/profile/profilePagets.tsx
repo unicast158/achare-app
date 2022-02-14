@@ -12,8 +12,11 @@ const ProfileTs = () => {
     const dispatch = useAppDispatch();
     const [key, setKey] = useState('home');
     const store = useAppSelector((store => store.profile));
-    /*const [Data, setData] = useState();*/
-    const [Data, setData] = useState({});
+    const [Data, setData] = useState({
+        name: undefined,
+        lastname: undefined,
+        birthday: undefined
+    });
 
     useEffect(() => {
         setData(StorageService.getUser());
