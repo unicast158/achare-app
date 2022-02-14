@@ -56,22 +56,24 @@ const ProfileTs = () => {
                                     <Table striped bordered hover size="sm" className={"w-50"}>
                                         <tbody>
                                         <tr>
-                                            <th width="170">نام :</th>
+                                            <th style={{width:170}}>نام :</th>
                                             <td>
                                                 <ProfileTableTemplateRow
-                                                    key={'name'}>{Data?.name}</ProfileTableTemplateRow>
+                                                    name={'name'}>{Data?.name}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th width="170">نام خانوادگی :</th>
+                                            <th style={{width:170}}>نام خانوادگی :</th>
                                             <td>
-                                                <ProfileTableTemplateRow>{Data?.lastname}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow
+                                                    name={'lastname'}>{Data?.lastname}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th width="170">تاریخ تولد :</th>
+                                            <th style={{width:170}}>تاریخ تولد :</th>
                                             <td>
-                                                <ProfileTableTemplateRow>{Data?.birthday}</ProfileTableTemplateRow>
+                                                <ProfileTableTemplateRow
+                                                    name={'birthday'}>{Data?.birthday}</ProfileTableTemplateRow>
                                             </td>
                                         </tr>
                                         </tbody>
